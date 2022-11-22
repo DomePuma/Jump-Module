@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class jump : MonoBehaviour
@@ -13,19 +15,19 @@ public class jump : MonoBehaviour
     private void Start()
     {
         if (rb != null) return;
-            Debug.LogError("Aucun rigidbody !");
+        Debug.LogError("Aucun rigidbody !");
     }
     private void OnCollisionEnter(Collision collision)
     {
         if (layer != collision.gameObject.layer) return; //Pour détecter le layer du sol et valider la condition
-            nbSauts = 0;
+        nbSauts = 0;
     }
-    private void Update()
+    public void Jump()
     {
-        if (Input.GetButtonDown("Jump") && nbSauts < maxSauts) //Récupère l'input du saut et vérifie le nombre de sauts restants
+        if(nbSauts < maxSauts)
         {
             rb.AddForce(transform.up * jumpForce); //Ajoute de la force au rigibody
             nbSauts++;
-        }
+        }  
     }
 }
